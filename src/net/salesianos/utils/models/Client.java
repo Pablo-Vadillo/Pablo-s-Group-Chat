@@ -1,4 +1,4 @@
-package net.salesianos.models;
+package net.salesianos.utils.models;
 
 public class Client {
     String name;
