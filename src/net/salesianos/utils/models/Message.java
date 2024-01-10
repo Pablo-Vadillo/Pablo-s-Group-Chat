@@ -7,7 +7,7 @@ public class Message {
     LocalTime localtime;
     String clientName;
 
-    public Message(Client client, String textMessage, LocalTime localtime) {
+    public Message(Client client, String textMessage) {
         this.textMessage = textMessage;
         this.localtime = LocalTime.now();
         this.clientName = client.getName();
