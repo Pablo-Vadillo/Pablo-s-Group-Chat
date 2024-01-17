@@ -13,7 +13,7 @@ import net.salesianos.utils.models.Client;
 public class ClientApp {
     public static void main(String[] args) throws Exception {
 
-        int userOption = 0;
+        String userOption = null;
         final Scanner SCANNER = new Scanner(System.in);
 
         System.out.println("¿Cómo te llamas?");
@@ -27,9 +27,7 @@ public class ClientApp {
         ServerListener serverListener = new ServerListener(objInStream);
         serverListener.start();
 
-        while (userOption != -1) {
-
-            System.out.println("Va a enviar datos de persona al servidor.");
+        while (userOption != "bye") {
             System.out.print("Introduzca el mensaje ");
 
             Client client = new Client(username, SCANNER.nextLine());
@@ -37,8 +35,8 @@ public class ClientApp {
             objOutStream.writeObject(client);
 
             try {
-                System.out.println("Pulse -1 pa salir o cualquier cosa para continuar: ");
-                userOption = SCANNER.nextInt();
+                System.out.println("Teclee bye pa salir: ");
+                userOption = SCANNER.nextLine();
                 SCANNER.nextLine();
             } catch (InputMismatchException e) {
                 System.out.println("Continuamos...");
