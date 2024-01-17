@@ -45,7 +45,6 @@ public class ClientApp {
         }
 
         SCANNER.close();
-
         objInStream.close();
         objOutStream.close();
         socket.close();

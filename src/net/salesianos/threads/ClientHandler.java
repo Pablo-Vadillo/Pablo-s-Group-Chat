@@ -41,9 +41,7 @@ public class ClientHandler extends Thread {
             this.connectedObjOutputStreamList.remove(this.clientObjOutStream);
             System.out.println("CERRANDO CONEXIÓN CON " + username.toUpperCase());
         } catch (IOException | ClassNotFoundException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
     }
 }
