@@ -41,11 +41,13 @@ public class ClientApp {
             } catch (InputMismatchException e) {
                 System.out.println("Continuamos...");
             }
+            if (userOption.startsWith("bye")){
+                SCANNER.close();
+                objInStream.close();
+                objOutStream.close();
+                socket.close();
+            }
         }
 
-        SCANNER.close();
-        objInStream.close();
-        objOutStream.close();
-        socket.close();
     }
 }
