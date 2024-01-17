@@ -30,8 +30,9 @@ public class ClientApp {
         while (userOption != -1) {
 
             System.out.println("Va a enviar datos de persona al servidor.");
-            System.out.print("Introduzca nombre: ");
-            Client client = new Client(SCANNER.nextLine());
+            System.out.print("Introduzca el mensaje ");
+
+            Client client = new Client(username, SCANNER.nextLine());
 
             objOutStream.writeObject(client);
 
