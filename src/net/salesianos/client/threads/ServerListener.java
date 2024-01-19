@@ -1,15 +1,19 @@
 package net.salesianos.client.threads;
 
+import net.salesianos.utils.models.Client;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.util.ArrayList;
 
-import net.salesianos.utils.models.Client;
 public class ServerListener extends Thread {
 
     private ObjectInputStream objInStream;
+    private ArrayList<ObjectInputStream> connectedObjInputStreamList;
 
     public ServerListener(ObjectInputStream socketObjectInputStream) {
         this.objInStream = socketObjectInputStream;
+        this.connectedObjInputStreamList = connectedObjInputStreamList;
     }
 
     @Override
@@ -17,7 +21,7 @@ public class ServerListener extends Thread {
         try {
             while (true) {
                 Client newServerClient = (Client) this.objInStream.readObject();
-                System.out.println("El servidor registró a nuevo cliente: " + newServerClient.toString());
+                System.out.println(newServerClient.toString());
             }
 
         } catch (ClassNotFoundException e1) {

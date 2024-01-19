@@ -14,10 +14,6 @@ public class Client implements java.io.Serializable {
         this.localtime = LocalTime.now();
     }
 
-    public String getName() {
-        return name;
-    }
-
     @Override
     public String toString() {
         DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("HH:mm:ss");

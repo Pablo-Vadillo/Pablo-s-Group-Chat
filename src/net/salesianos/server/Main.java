@@ -10,28 +10,31 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 public class Main {
-    public static void main(String[] args) throws Exception {
+
+    public static void main(String[] args) {
         final int SERVER_PORT = 55000;
+        ArrayList<Client> messages = new ArrayList<>();
 
-        ArrayList<Client> clients = new ArrayList<>();
-        ArrayList<Client> messagges = new ArrayList<>();
-
-        ServerSocket serverSocket = new ServerSocket(SERVER_PORT);
+        ServerSocket serverSocket;
         ArrayList<ObjectOutputStream> connectedObjOutputStream = new ArrayList<>();
 
-        while (true) {
-            System.out.println("Esperando conexión...");
-            Socket clientSocket = serverSocket.accept();
-            System.out.println("CONEXION ESTABLECIDA");
+        try {
+            serverSocket = new ServerSocket(SERVER_PORT);
+            System.out.println("Servidor en espera de conexiones...");
 
-            ObjectOutputStream clientObjOutStream = new ObjectOutputStream(clientSocket.getOutputStream());
-            connectedObjOutputStream.add(clientObjOutStream);
+            while (true) {
+                Socket clientSocket = serverSocket.accept();
+                System.out.println("CONEXIÓN ESTABLECIDA");
 
-            ObjectInputStream clientObjInStream = new ObjectInputStream(clientSocket.getInputStream());
-            ClientHandler clientHandler = new ClientHandler(clientObjInStream, clientObjOutStream,
-                    connectedObjOutputStream);
-            clientHandler.start();
+                ObjectOutputStream clientObjOutStream = new ObjectOutputStream(clientSocket.getOutputStream());
+                connectedObjOutputStream.add(clientObjOutStream);
+
+                ObjectInputStream clientObjInStream = new ObjectInputStream(clientSocket.getInputStream());
+                ClientHandler clientHandler = new ClientHandler(clientObjInStream, clientObjOutStream, connectedObjOutputStream, messages);
+                clientHandler.start();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        // serverSocket.close();
     }
 }
